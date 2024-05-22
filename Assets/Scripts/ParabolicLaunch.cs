@@ -6,6 +6,7 @@ public class ParabolicLaunch : MonoBehaviour
 {
     [SerializeField] private Rigidbody ball;
 	[SerializeField] private Transform target;
+	[SerializeField] private Rigidbody player;
 
 	public float h = 25;
 	public float gravity = -18;
@@ -13,13 +14,13 @@ public class ParabolicLaunch : MonoBehaviour
 	public bool debugPath;
 
 	void Update() {
-		if (Input.GetKeyDown (KeyCode.Space)) {
+		/*if (Input.GetKeyDown (KeyCode.Space)) {
 			//Launch ();
 		}
 
 		if (debugPath) {
 			DrawPath ();
-		}
+		}*/
 	}
 
 	void Launch() {
@@ -28,7 +29,7 @@ public class ParabolicLaunch : MonoBehaviour
 		ball.velocity = CalculateLaunchData().initialVelocity;
 	}
 
-	LaunchData CalculateLaunchData() {
+	/*LaunchData CalculateLaunchData() {
 		float displacementY = target.position.y - ball.position.y;
 		Vector3 displacementXZ = new Vector3 (target.position.x - ball.position.x, 0, target.position.z - ball.position.z);
 		float time = Mathf.Sqrt(-2*h/gravity) + Mathf.Sqrt(2*(displacementY - h)/gravity);
@@ -36,11 +37,21 @@ public class ParabolicLaunch : MonoBehaviour
 		Vector3 velocityXZ = displacementXZ / time;
 
 		return new LaunchData(velocityXZ + velocityY * -Mathf.Sign(gravity), time);
+	}*/
+	LaunchData CalculateLaunchData()
+	{
+		float displacementY = target.position.y - ball.position.y;
+		Vector3 displacementXZ = new Vector3(target.position.x - ball.position.x, 0, target.position.z - ball.position.z);
+		float time = Mathf.Sqrt(-2 * h / gravity) + Mathf.Sqrt(2 * (displacementY - h) / gravity);
+		Vector3 velocityY = Vector3.up * Mathf.Sqrt(-2 * gravity * h);
+		Vector3 velocityXZ = displacementXZ / time;
+
+		return new LaunchData(velocityXZ + velocityY * -Mathf.Sign(gravity), time);
 	}
 
 	void DrawPath() {
 		LaunchData launchData = CalculateLaunchData ();
-		Vector3 previousDrawPoint = ball.position;
+		Vector3 previousDrawPoint = player.position;//mod
 
 		int resolution = 30;
 		for (int i = 1; i <= resolution; i++) {

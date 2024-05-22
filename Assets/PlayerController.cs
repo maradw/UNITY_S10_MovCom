@@ -32,23 +32,32 @@ public class PlayerController : MonoBehaviour
     {
         if (click.performed)
         {
-            Debug.Log("¡El botón ha sido presionado!");
+            //Debug.Log("¡El botón ha sido presionado!");
 
         }
     } 
-    void OnPosition(InputAction.CallbackContext context)
+    public void OnPosition(InputAction.CallbackContext position)
+    {
+        transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+    }
+    /*void OnPosition(InputAction.CallbackContext context)
     {
         Vector2 mousePosition = context.ReadValue<Vector2>();
-        // Aquí puedes manejar la posición del ratón
-    }
+        
+    }*/
     public void FixedUpdate()
     {
         myRBD.velocity = new Vector3(_horizontal * velocityModifier, myRBD.velocity.y, _vertical * velocityModifier);
     }
-    public void GetTransform()
+    public void DetectEnemy()
     {
 
+        
+        Vector3 position = transform.position;
+        RaycastHit hit;
+       // Ray ray = new Ray(transform.position, )
     }
+    
     // Update is called once per frame
     void Update()
     {

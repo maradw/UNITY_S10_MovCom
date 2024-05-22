@@ -126,7 +126,7 @@
                     "path": "<Mouse>/position",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "mouse",
                     "action": "MousePosition",
                     "isComposite": false,
                     "isPartOfComposite": false
