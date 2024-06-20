@@ -25,26 +25,26 @@ public class PlayerController : MonoBehaviour
     }
     public void OnShoot(InputAction.CallbackContext shoot)
     {
-        Instantiate(proyectile, transform.position, Quaternion.identity);
+       // Instantiate(proyectile, transform.position, Quaternion.identity);
 
     }
-    public void OnClick(InputAction.CallbackContext click)
+    /*public void OnClick(InputAction.CallbackContext click)
     {
         if (click.performed)
         {
-            //Debug.Log("¡El botón ha sido presionado!");
+            //Debug.Log("a");
 
         }
-    } 
-    public void OnPosition(InputAction.CallbackContext position)
+    } */
+    public void OnPositionA(InputAction.CallbackContext position)
     {
         transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
     }
-    /*void OnPosition(InputAction.CallbackContext context)
+    public void OnPosition(InputAction.CallbackContext context)
     {
         Vector2 mousePosition = context.ReadValue<Vector2>();
         
-    }*/
+    }
     public void FixedUpdate()
     {
         myRBD.velocity = new Vector3(_horizontal * velocityModifier, myRBD.velocity.y, _vertical * velocityModifier);
